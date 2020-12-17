@@ -58,6 +58,6 @@ while True:
     line.set_xdata(PData.axis_x)
     line.set_ydata(PData.axis_y)
     line2.set_xdata(PData.axis_x)
-    line2.set_ydata(PData.axis_y)
+    line2.set_ydata(PData.axis_y - np.mean(PData.axis_y))
     fig.canvas.draw()
     fig.canvas.flush_events()
