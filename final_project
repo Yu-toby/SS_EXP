@@ -29,7 +29,7 @@ plt.setp(line2,color = 'r')
 
 
 PData= PlotData(500)
-ax.set_ylim(400,450)
+ax.set_ylim(430,445)
 ax2.set_ylim(0,500)
 
 
