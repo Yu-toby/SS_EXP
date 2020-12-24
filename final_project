@@ -13,7 +13,7 @@ class PlotData:
     def __init__(self, max_entries=30):
         self.axis_x = deque(maxlen=max_entries)
         self.axis_y = deque(maxlen=max_entries)
-        self.x = np.linspace(0,100,300)
+        self.x = np.linspace(0,100,500)
         
     def add(self, x, y):
         self.axis_x.append(x)
@@ -30,7 +30,7 @@ fig1, (ax4) = plt.subplots(1,1)
 line,  = ax.plot(np.random.randn(100))
 line2, = ax2.plot(np.random.randn(100))
 line3, = ax3.plot(np.random.randn(100))
-line4, = ax.plot(np.random.randn(100))
+line4, = ax4.plot(np.random.randn(100))
 plt.show(block = False)
 plt.setp(line2,color = 'r')
 
@@ -41,6 +41,23 @@ ax.set_ylim(400,450)
 ax2.set_ylim(-10,10)
 ax3.set_ylim(400,450)
 ax4.set_ylim(0,15)
+
+
+angle = np.linspace(-np.pi, np.pi, 50)
+cirx = np.sin(angle)
+ciry = np.cos(angle)
+z = np.roots([1/7,1/7,1/7,1/7,1/7,1/7,1/7,])#
+
+plt.figure(figsize=(8,8))
+plt.plot(cirx, ciry,'k-')
+plt.plot(np.real(z), np.imag(z), 'o', markersize=12)
+plt.plot(0, 0, 'x', markersize=12)
+plt.grid()
+
+plt.xlim((-2, 2))
+plt.xlabel('Real')
+plt.ylim((-2, 2))
+plt.ylabel('Imag')
 
 
 
@@ -76,7 +93,7 @@ while True:
     ax.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
     ax2.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
     ax3.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
-    ax4.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
+    ax4.set_xlim(0, 120)
     
     
     line.set_xdata(PData.axis_x)
@@ -89,10 +106,10 @@ while True:
     line3.set_xdata(PData.axis_x)
     line3.set_ydata(y)
     
-    #if (len(abs(np.fft.fft(PData.axis_y))) == 300):
-    #line4.set_xdata(PData.axis_x)
-    #line4.set_ydata(abs(np.fft.fft(PData.axis_y)))
-    print(abs(xf))
+    if (len(PData.axis_y) >= 500):
+        line4.set_xdata(PData.x)
+        line4.set_ydata(abs(np.fft.fft(y)))
+    print(abs(np.fft.fft(PData.axis_y)))
 
     fig.canvas.draw()
     fig.canvas.flush_events()
