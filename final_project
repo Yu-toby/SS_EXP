@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 import time
@@ -14,23 +13,34 @@ class PlotData:
     def __init__(self, max_entries=30):
         self.axis_x = deque(maxlen=max_entries)
         self.axis_y = deque(maxlen=max_entries)
+        self.x = np.linspace(0,100,300)
+        
     def add(self, x, y):
         self.axis_x.append(x)
         self.axis_y.append(y)
+        
+
+    
+
 
 
 #initial
-fig, (ax,ax2) = plt.subplots(2,1)
+fig, (ax,ax2,ax3) = plt.subplots(3,1)
+fig1, (ax4) = plt.subplots(1,1)
 line,  = ax.plot(np.random.randn(100))
 line2, = ax2.plot(np.random.randn(100))
+line3, = ax3.plot(np.random.randn(100))
+line4, = ax.plot(np.random.randn(100))
 plt.show(block = False)
 plt.setp(line2,color = 'r')
 
 
 
 PData= PlotData(500)
-ax.set_ylim(430,445)
-ax2.set_ylim(0,500)
+ax.set_ylim(400,450)
+ax2.set_ylim(-10,10)
+ax3.set_ylim(400,450)
+ax4.set_ylim(0,15)
 
 
 
@@ -52,12 +62,44 @@ while True:
             PData.add(time.time() - start, data)
         except:
             pass
+    
+    
+    a = PData.axis_y 
+    y = np.zeros(len(a))
 
+    for i in range(len(a)):
+        y[i] = 1/5*(a[i] + a[i-1] + a[i-2] + a[i-3] + a[i-4])
+    
+    
+
+    
     ax.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
     ax2.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
+    ax3.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
+    ax4.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
+    
+    
     line.set_xdata(PData.axis_x)
     line.set_ydata(PData.axis_y)
+    #print(abs(xf))
+    
     line2.set_xdata(PData.axis_x)
     line2.set_ydata(PData.axis_y - np.mean(PData.axis_y))
+    
+    line3.set_xdata(PData.axis_x)
+    line3.set_ydata(y)
+    
+    #if (len(abs(np.fft.fft(PData.axis_y))) == 300):
+    #line4.set_xdata(PData.axis_x)
+    #line4.set_ydata(abs(np.fft.fft(PData.axis_y)))
+    print(abs(xf))
+
     fig.canvas.draw()
     fig.canvas.flush_events()
+    
+    fig1.canvas.draw()
+    fig1.canvas.flush_events()
+    
+    
+    
+    
