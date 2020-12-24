@@ -39,7 +39,7 @@ plt.setp(line2,color = 'r')
 PData= PlotData(500)
 ax.set_ylim(400,450)
 ax2.set_ylim(-10,10)
-ax3.set_ylim(400,450)
+ax3.set_ylim(-10,10)
 ax4.set_ylim(0,15)
 
 
@@ -104,7 +104,7 @@ while True:
     line2.set_ydata(PData.axis_y - np.mean(PData.axis_y))
     
     line3.set_xdata(PData.axis_x)
-    line3.set_ydata(y)
+    line3.set_ydata(y - np.mean(y))
     
     if (len(PData.axis_y) >= 500):
         line4.set_xdata(PData.x)
