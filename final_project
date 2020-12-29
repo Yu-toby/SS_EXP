@@ -52,11 +52,14 @@ z = np.roots([1/7,1/7,1/7,1/7,1/7,1/7,1/7,])#
 plt.figure(figsize=(8,8))
 plt.plot(cirx, ciry,'k-')
 plt.plot(np.real(z), np.imag(z), 'o', markersize=12)
+#plt.plot(0.1, 0.1, label='6', markersize=12)
 plt.plot(0, 0, 'x', markersize=12)
-plt.grid()
 
+plt.grid()
+plt.text(0.1,0.1,6)
 plt.xlim((-2, 2))
 plt.xlabel('Real')
+
 plt.ylim((-2, 2))
 plt.ylabel('Imag')
 
