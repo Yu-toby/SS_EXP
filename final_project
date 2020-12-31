@@ -1,4 +1,3 @@
-  
 import matplotlib.pyplot as plt
 import numpy as np
 import time
@@ -38,7 +37,7 @@ plt.setp(line2,color = 'r')
 
 
 PData= PlotData(500)
-ax.set_ylim(400,420)
+ax.set_ylim(-10,10)
 ax2.set_ylim(-10,10)
 ax3.set_ylim(-10,10)
 ax4.set_ylim(0,15)
@@ -68,7 +67,7 @@ plt.ylabel('Imag')
 # plot parameters
 print ('plotting data...')
 # open serial port
-strPort='com10'
+strPort='com4'
 ser = serial.Serial(strPort, 115200)
 ser.flush()
 
@@ -91,7 +90,6 @@ while True:
     for i in range(len(a)):
         y[i] = 1/5*(a[i] + a[i-1] + a[i-2] + a[i-3] + a[i-4])
     
-    
 
     
     ax.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
@@ -101,7 +99,7 @@ while True:
     
     
     line.set_xdata(PData.axis_x)
-    line.set_ydata(PData.axis_y)
+    line.set_ydata(PData.axis_y - np.mean(PData.axis_y))
     #print(abs(xf))
     
     line2.set_xdata(PData.axis_x)
@@ -120,4 +118,3 @@ while True:
     
     fig1.canvas.draw()
     fig1.canvas.flush_events()
-    
